@@ -13,7 +13,10 @@
 #include <stdint.h>
 
 #include "../../guard/guard.h"
+#include "./types.h"
+
 #include "./Window_t/window.h"
+#include "./Image_t/image.h"
 
 /* ================================================================ */
 
@@ -42,4 +45,4 @@ extern SDL_Color* color_ptr;
     }
 #endif
 
-#endif
+#endif /* CORE_H */
