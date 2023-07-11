@@ -510,3 +510,98 @@ int Global_set_SDL_Color(const SDL_Color* color) {
 
     return result;
 }
+
+/* ================================================================ */
+
+uint8_t Window_get_context_type(const Window_t window) {
+    /* =========== VARIABLES ========== */
+
+    uint8_t context_type = 0;
+
+    /* ================================= */
+
+    /* ================================================================ */
+    /* ================ Make sure a window is not NULL ================ */
+    /* ================================================================ */
+
+    if (window != NULL) {
+        context_type = window->context->type;
+    }
+    else {
+        warn_with_user_msg(__func__, "provided window is NULL");
+    }
+
+    /* ================================= */
+
+    return context_type;
+}
+
+/* ================================================================ */
+
+extern void* Window_get_context(const Window_t window) {
+    /* =========== VARIABLES ========== */
+
+    Context_t context = NULL;
+
+    /* ================================= */
+
+    /* ================================================================ */
+    /* ================ Make sure a window is not NULL ================ */
+    /* ================================================================ */
+
+    if (window != NULL) {
+        context = window->context->context;
+    }
+    else {
+        warn_with_user_msg(__func__, "provided window is NULL");
+    }
+
+    /* ================================= */
+
+    return context;
+}
+
+/* ================================================================ */
+
+void Window_display_BG(const Window_t window, const Image_t image) {
+    /* =========== VARIABLES ========== */
+
+    SDL_Rect BG_dimension = {0, 0, 0, 0};
+
+    /* ================================= */
+
+    /* ================================================================ */
+    /* ================ Make sure a window is not NULL ================ */
+    /* ================================================================ */
+
+    if (window != NULL) {
+        
+        /* ================================================================ */
+        /* ================ Make sure an image is not NULL ================ */
+        /* ================================================================ */
+
+        if (image != NULL) {
+
+            /* Get the size of a window's client area */
+            SDL_GetWindowSize(window->window, &BG_dimension.w, &BG_dimension.h);
+
+            if (window->context->type == SURFACE) {
+
+                SDL_BlitScaled((SDL_Surface*) image, NULL, (SDL_Surface*) window->context->context, &BG_dimension);
+            }
+            else {
+                warn_with_user_msg(__func__, "unsupported rendering context");
+            }
+        }
+        else {
+            warn_with_user_msg(__func__, "provided image is NULL");
+        }
+    }
+    else {
+        warn_with_user_msg(__func__, "provided window is NULL");
+    }
+
+    /* ================================= */
+
+    return ;
+}

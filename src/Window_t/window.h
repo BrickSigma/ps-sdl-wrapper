@@ -8,14 +8,6 @@
 #include "../core.h"
 
 /* ================================================================ */
-/* ====================== TYPES DEFINITIONS ======================= */
-/* ================================================================ */
-
-typedef struct _window* Window_t;
-
-typedef struct _context* Context_t;
-
-/* ================================================================ */
 /* ==================== TYPES IMPLEMENTATIONS ===================== */
 /* ================================================================ */
 
@@ -77,9 +69,26 @@ extern int Global_set_SDL_Color(const SDL_Color* color);
 
 /* ================================================================ */
 
+/**
+ * Get a window rendering context type.
+*/
+extern uint8_t Window_get_context_type(const Window_t window);
+
+/* ================================================================ */
+
+extern void* Window_get_context(const Window_t window);
+
+/* ================================================================ */
+
+/**
+ * Display an image as a background one. This function calls SDL_BlitScaled.
+*/
+extern void Window_display_BG(const Window_t window, const Image_t image);
+
+/* ================================================================ */
+
 #ifdef __cplusplus
     }
 #endif
-
 
 #endif
