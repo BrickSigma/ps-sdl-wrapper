@@ -457,8 +457,6 @@ int Window_set_FPS(const Window_t window, size_t fps) {
         warn_with_user_msg(__func__, "provided window is NULL");
     }
 
-
-
     /* ================================= */
 
     return result;
@@ -480,8 +478,6 @@ void Global_set_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     /* New alpha value */
     color_ptr->a = alpha;
 
-
-
     /* ================================= */
 
     return ;
@@ -498,13 +494,12 @@ int Global_set_SDL_Color(const SDL_Color* color) {
     /* ================================= */
 
 
+
     /* Check if color is not NULL first */
     color_ptr = (color != NULL) ? (SDL_Color*) color : color_ptr;
 
     /* Update return value */
     result = (color != NULL) ? EXIT_SUCCESS : EXIT_FAILURE;
-
-
 
     /* ================================= */
 

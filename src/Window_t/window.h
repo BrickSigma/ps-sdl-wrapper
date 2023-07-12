@@ -1,10 +1,6 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#ifdef __cplusplus
-    extern "C" {
-#endif
-
 #include "../core.h"
 
 /* ================================================================ */
@@ -86,9 +82,5 @@ extern void* Window_get_context(const Window_t window);
 extern void Window_display_BG(const Window_t window, const Image_t image);
 
 /* ================================================================ */
-
-#ifdef __cplusplus
-    }
-#endif
 
 #endif
