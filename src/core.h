@@ -11,12 +11,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <math.h>
+#include <string.h>
 
 #include "../../guard/guard.h"
 #include "./types.h"
 
 #include "./Window_t/window.h"
 #include "./Image_t/image.h"
+#include "./Area_t/area.h"
 
 /* ================================================================ */
 
