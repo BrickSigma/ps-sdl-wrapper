@@ -25,5 +25,14 @@ typedef struct _context* Context_t;
 typedef struct SDL_Surface* Image_t;
 
 /* ================================================================ */
+/* =========================== IMAGE_T ============================ */
+/* ================================================================ */
+
+/**
+ * A structure that defines an area of a screen/window
+*/
+typedef struct _area* Area_t;
+
+/* ================================================================ */
 
 #endif /* TYPES_H */
