@@ -109,8 +109,6 @@ static Context_t Context_create(const Window_t window, uint8_t context_type, uin
         warn_with_user_msg(caller_name, "couldn't create a context");
     }
 
-
-
     /* ================================= */
 
     return context;
@@ -160,6 +158,8 @@ static int Context_destroy(Context_t* context, const char* caller_name) {
         /* */
         warn_with_user_msg(caller_name, "provided context is NULL");
     }
+
+    /* ================================= */
 
     return result;
 }
@@ -257,8 +257,6 @@ Window_t Window_create(const char* name, int width, int height, uint32_t sdl_fla
         free(options);
     }
 
-
-
     /* ================================= */
 
     return window;
@@ -311,8 +309,6 @@ int Window_destroy(Window_t* window) {
         warn_with_user_msg(__func__, "provided window is NULL");
     }
 
-
-
     /* ================================= */
 
     return result;
@@ -356,8 +352,6 @@ int Window_clear(const Window_t window) {
         warn_with_user_msg(__func__, "provided window is NULL");
     }
 
-
-    
     /* ================================= */
 
     return result;
@@ -419,8 +413,6 @@ int Window_update(const Window_t window) {
     else {
         warn_with_user_msg(__func__, "provided window is NULL");
     }
-
-
 
     /* ================================= */
 
