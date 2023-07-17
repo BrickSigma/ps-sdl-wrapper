@@ -82,22 +82,6 @@ static Context_t Context_create(const Window_t window, uint8_t context_type, uin
 
             /* Set its type */
             context->type = context_type;
-
-            /* Bind a context to the window */
-            window->context = context;
-
-            /* ================================= */
-
-
-
-            if (window->context == NULL) {
-
-                /* Destroy the context */
-                free(context);
-
-                /* ======================= Clear the memory ======================= */
-                memset(context, 0, sizeof(struct _context));
-            }
         }
         else {
             /* */
@@ -116,14 +100,10 @@ static Context_t Context_create(const Window_t window, uint8_t context_type, uin
 
 /* ================================================================ */
 
-static int Context_destroy(Context_t* context, const char* caller_name) {
+static int Context_destroy(Context_t* context) {
     /* =========== VARIABLES ========== */
 
-    /* Operation result */
     int result = EXIT_FAILURE;
-
-    /* Error message container */
-    const char* error_msg;
 
     /* ================================= */
 
@@ -152,11 +132,12 @@ static int Context_destroy(Context_t* context, const char* caller_name) {
         /* ======================= Clear the memory ======================= */
         memset(*context, 0, sizeof(struct _context));
 
+        /* Deallocate the context itself */
+        free(*context);
+
+        /* ================================= */
+
         result = EXIT_SUCCESS;
-    }
-    else {
-        /* */
-        warn_with_user_msg(caller_name, "provided context is NULL");
     }
 
     /* ================================= */
@@ -250,7 +231,7 @@ Window_t Window_create(const char* name, int width, int height, uint32_t sdl_fla
 
         /* ====================== Deallocate objects ====================== */
 
-        /* Free window  */
+        /* Free window */
         free(window);
 
         /* Free options */
@@ -281,7 +262,7 @@ int Window_destroy(Window_t* window) {
     if ((window != NULL) && (*window != NULL)) {
 
         /* Destroy a context */
-        Context_destroy(&(*window)->context, __func__);
+        Context_destroy(&(*window)->context);
 
         /* ======================= Clear the memory ======================= */
         memset((*window)->options, 0, sizeof(struct _window_opts));
@@ -298,10 +279,10 @@ int Window_destroy(Window_t* window) {
         /* Destroy the window container itself */
         free(*window);
 
-        /* ================================= */
-
         /* Set the window to be NULL */
         *window = NULL;
+
+        /* ================================= */
 
         result = EXIT_SUCCESS;
     }

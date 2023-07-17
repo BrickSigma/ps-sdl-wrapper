@@ -1,6 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#define AREAS_NUM 8
+
 #include "../core.h"
 
 /* ================================================================ */
@@ -82,5 +84,14 @@ extern void* Window_get_context(const Window_t window);
 extern void Window_display_BG(const Window_t window, const Image_t image);
 
 /* ================================================================ */
+
+/**
+ * Set a rendering, drawing target.
+ * 
+ * @param area an area to be a drawing target
+ * 
+ * @return 0 on success, a negative value on error; information about the error occurred is printed to the console.
+*/
+extern int Window_set_target_Area(const Area_t area);
 
 #endif
