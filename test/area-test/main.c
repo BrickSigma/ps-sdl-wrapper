@@ -9,12 +9,16 @@
 
 /* ================================================================ */
 
+extern Area_t __current_area;
+
 int  main(int argc, char** argv) {
     /* =========== VARIABLES ========== */
 
     Window_t window = NULL;
 
     Area_t area1 = NULL;
+
+    Object_t obj = NULL;
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER);
 
@@ -28,9 +32,17 @@ int  main(int argc, char** argv) {
 
         area1 = Area_create(&rect, NULL, window);
 
+        __current_area = area1;
+
+        obj = Object_create(10, 10);
+
         Area_info(area1);
 
+        Window_set_FPS(window, 60);
+
         int quit = 0;
+
+        int x_pos = obj->position.x;
 
         SDL_Event event;
 
@@ -46,6 +58,10 @@ int  main(int argc, char** argv) {
                 }
             }
 
+            x_pos++;
+
+            Object_set_pos(obj, x_pos, 0);
+
             Global_set_color(255, 255, 255, 255);
 
             Window_clear(window);
@@ -54,9 +70,13 @@ int  main(int argc, char** argv) {
 
             Area_clear(area1);
 
+            Object_display(obj);
+
             Window_update(window);
         }
     }
+
+    Object_destroy(&obj);
 
     Area_destroy(&area1);
 
