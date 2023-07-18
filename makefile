@@ -14,6 +14,10 @@ all: $(OBJDIR)/guard.o $(OBJDIR)/window.o $(OBJDIR)/image.o
 $(OBJDIR)/guard.o: guard/guard.c
 	$(cc) -c $(CFLAGS) -o $@ $^
 
+# Make a core.o object file
+$(OBJDIR)/core.o: src/core.c
+	$(cc) -c $(CFLAGS) -o $@ $^
+
 # Make a window.o object file
 $(OBJDIR)/window.o: src/Window_t/window.c
 	$(cc) -c $(CFLAGS) -o $@ $^
@@ -26,8 +30,12 @@ $(OBJDIR)/image.o: src/Image_t/image.c
 $(OBJDIR)/area.o: src/Area_t/area.c
 	$(cc) -c $(CFLAGS) -o $@ $^
 
+# Make an area.o object file
+$(OBJDIR)/object.o: src/Object_t/object.c
+	$(cc) -c $(CFLAGS) -o $@ $^
+
 # Making a library
-lib: $(OBJDIR)/guard.o $(OBJDIR)/window.o $(OBJDIR)/image.o $(OBJDIR)/area.o
+lib: $(OBJDIR)/guard.o $(OBJDIR)/window.o $(OBJDIR)/image.o $(OBJDIR)/area.o $(OBJDIR)/object.o $(OBJDIR)/core.o
 	$(AR) $(ARFLAGS) libps.a $^
 
 # ================================================================ #
