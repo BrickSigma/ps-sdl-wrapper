@@ -1,6 +1,6 @@
 #include "./area.h"
 
-extern SDL_Color* color_ptr;
+Area_t __current_area = NULL;
 
 /* ================================================================ */
 

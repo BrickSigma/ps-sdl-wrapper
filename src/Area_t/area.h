@@ -62,4 +62,6 @@ extern void Area_info(const Area_t area);
 */
 extern int Area_clear(const Area_t area);
 
+/* ================================================================ */
+
 #endif /* AREA_H */
