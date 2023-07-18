@@ -14,12 +14,13 @@
 #include <math.h>
 #include <string.h>
 
-#include "../../guard/guard.h"
+#include "../guard/guard.h"
 #include "./types.h"
 
 #include "./Window_t/window.h"
 #include "./Image_t/image.h"
 #include "./Area_t/area.h"
+#include "./Object_t/object.h"
 
 /* ================================================================ */
 
@@ -34,13 +35,20 @@ enum _renderer_types {
     SURFACE = (1 << 1),     /* 2 */
 };
 
-/* ================================ */
+
 
 /* Color that is used in drawing operations */
 extern SDL_Color color;
 
 /* A pointer to the global color structure */
 extern SDL_Color* color_ptr;
+
+/* Global current area */
+extern Area_t __current_area;
+
+/* ================================================================ */
+
+extern int Rect_is_full_inside(const SDL_Rect* src, const SDL_Rect* dst);
 
 /* ================================================================ */
 
