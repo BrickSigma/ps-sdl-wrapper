@@ -164,3 +164,7 @@ void Object_display(Object_t object) {
 }
 
 /* ================================================================ */
+
+int Object_is_inside_Area(const Object_t obj, const Area_t area) {
+    
+}

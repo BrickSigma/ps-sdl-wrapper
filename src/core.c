@@ -15,8 +15,6 @@ int Rect_is_full_inside(const SDL_Rect* src, const SDL_Rect* dst) {
             &&
             (((src->y + src->h) <= (dst->y + dst->h)) && (src->y >= dst->y))
         );
-
-        printf("%d\n", result);
     }
     
     /* ================================ */
