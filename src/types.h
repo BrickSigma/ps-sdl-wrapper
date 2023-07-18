@@ -34,5 +34,14 @@ typedef struct SDL_Surface* Image_t;
 typedef struct _area* Area_t;
 
 /* ================================================================ */
+/* =========================== OBJECT_T =========================== */
+/* ================================================================ */
+
+/**
+ * A structure that defines a "sprite" for a SDL_Surface
+*/
+typedef struct _object* Object_t;
+
+/* ================================================================ */
 
 #endif /* TYPES_H */
