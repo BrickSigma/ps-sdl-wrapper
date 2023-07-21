@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#include "../../guard/guard.h"
+#include "../guard/guard.h"
 #include "./Window_t/window.h"
 
 /* ================================================================ */
