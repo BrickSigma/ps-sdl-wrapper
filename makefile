@@ -8,7 +8,11 @@ LDFLAGS := -lSDL2 -lSDL2_image -lm
 AR := ar
 ARFLAGS := -r -c 
 
-all: $(OBJDIR)/guard.o $(OBJDIR)/window.o
+all: lib
+
+# Making a library
+lib: $(OBJDIR)/guard.o $(OBJDIR)/window.o
+	$(AR) $(ARFLAGS) libps.a $^
 
 # Make a guard.o object file
 $(OBJDIR)/guard.o: guard/guard.c
@@ -17,10 +21,6 @@ $(OBJDIR)/guard.o: guard/guard.c
 # Make a window.o object file
 $(OBJDIR)/window.o: src/Window_t/window.c
 	$(cc) -c $(CFLAGS) -o $@ $^
-
-# Making a library
-lib: $(OBJDIR)/guard.o $(OBJDIR)/window.o
-	$(AR) $(ARFLAGS) libps.a $^
 
 # ================================================================ #
 
