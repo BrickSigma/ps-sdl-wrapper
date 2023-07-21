@@ -2,11 +2,11 @@
 
 #include <time.h>
 
-#define WIDTH 480
+#define WIDTH 120
 
-#define HEIGHT 480
+#define HEIGHT 120
 
-#define STARS 16
+#define STARS 4
 
 #define STAR_SIZE 16
 
@@ -15,6 +15,33 @@ struct _timer {
 
     float delta;
 };
+
+int Object__is_collide(const Object_t obj_1, const Object_t obj_2) {
+    /* =========== VARIABLES ========== */
+
+    SDL_Rect position_1;
+    SDL_Rect position_2;
+
+    /* ================================ */
+
+    if ((obj_1 != NULL) && (obj_2 != NULL)) {
+        position_1.x = obj_1->position.x;
+        position_1.y = obj_1->position.y;
+
+        position_1.w = obj_1->dimensions.x;
+        position_1.h = obj_1->dimensions.y;
+
+        position_2.x = obj_2->position.x;
+        position_2.y = obj_2->position.y;
+
+        position_2.w = obj_2->dimensions.x;
+        position_2.h = obj_2->dimensions.y;
+
+        return Rect_is_collide(&position_1, &position_2);
+    }
+
+    return -1;
+}
 
 /* ================================================================ */
 
@@ -27,6 +54,7 @@ int main(int argc, char** argv) {
     time_t t;
 
     size_t i = 0;
+    size_t j = 0;
 
 
 
@@ -51,6 +79,10 @@ int main(int argc, char** argv) {
     Object_t stars[STARS];
 
     struct _timer* timers[STARS];
+
+
+
+    SDL_Rect position = {0, 0, STAR_SIZE, STAR_SIZE};
 
     /* ================================ */
 
@@ -79,7 +111,7 @@ int main(int argc, char** argv) {
                 for (i = 0; i < STARS; i++) {
                     *(timers + i) = (struct _timer*) malloc(sizeof(struct _timer));
 
-                    (*(timers + i))->time = 1 + (float) (rand() % 10);
+                    (*(timers + i))->time = 1 + (float) (rand() % 1);
 
                     printf("%f\n", (*(timers + i))->time);
 
@@ -91,8 +123,6 @@ int main(int argc, char** argv) {
                 int quit = 0;
 
                 uint64_t start;
-
-                float delta = 0;
 
                 while (!quit) {
 
@@ -118,17 +148,30 @@ int main(int argc, char** argv) {
 
                     Window_update(window);
 
-                    delta += (SDL_GetTicks64() - start) / 1000.0f;
-
                     for (i = 0; i < STARS; i++) {
                         (*(timers + i))->delta += (SDL_GetTicks64() - start) / 1000.0f;
 
                         if ((*(timers + i))->delta >= (*(timers + i))->time) {
+
+                            for (j = 0; j < STARS; j++) {
+
+                                if (i == j) continue ;
+
+                                position.x = rand() % (WIDTH - STAR_SIZE);
+                                position.y = rand() % (HEIGHT - STAR_SIZE);
+
+                                Object_set_pos(*(stars + i), position.x, position.y);
+
+                                if (Object__is_collide(*(stars + i), *(stars + j))) {
+                                    printf("Collision detected\n");
+
+                                    printf("[%d; %d]\n", i, j);
+
+                                    j = 0;
+                                }
+                            }
+
                             (*(timers + i))->delta = 0;
-
-                            Object_set_pos(*(stars + i), (rand() % (WIDTH - STAR_SIZE)), (rand() % (HEIGHT - STAR_SIZE)));
-
-                            printf("Star %ld position: [%d; %d]\n", i, (*(stars + i))->position.x, (*(stars + i))->position.y);
                         }
                     }
                 }
