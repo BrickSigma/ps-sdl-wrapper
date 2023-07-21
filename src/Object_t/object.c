@@ -165,6 +165,99 @@ void Object_display(Object_t object) {
 
 /* ================================================================ */
 
-int Object_is_inside_Area(const Object_t obj, const Area_t area) {
-    
+int Object_set_color(const Object_t obj, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
+    /* =========== VARIABLES ========== */
+
+    int result = EXIT_FAILURE;
+
+    /* ================================ */
+
+    if (obj != NULL) {
+        obj->color.r  = red;
+        obj->color.g = green;
+        obj->color.b = blue;
+
+        obj->color.a = alpha;
+
+        /* ================================ */
+
+        result = EXIT_SUCCESS;
+    }
+    else {
+        warn_with_user_msg(__func__, "provided object is NULL");
+    }
+
+    /* ================================ */
+
+    return result ;
+}
+
+/* ================================================================ */
+
+int Object_get_color(const Object_t obj, SDL_Color* dst) {
+    /* =========== VARIABLES ========== */
+
+    int result = EXIT_FAILURE;
+
+    /* ================================ */
+
+    if (obj != NULL) {
+
+        if (dst != NULL) {
+            dst->r = obj->color.r;
+            dst->g = obj->color.g;
+            dst->b = obj->color.b;
+
+            dst->a = obj->color.a;
+
+            /* ================================ */
+
+            result = EXIT_SUCCESS;
+        }
+        else {
+            warn_with_user_msg(__func__, "destination color is NULL");
+        }
+    }
+    else {
+        warn_with_user_msg(__func__, "provided object is NULL");
+    }
+
+    /* ================================ */
+
+    return result;
+}
+
+/* ================================================================ */
+
+int Object_set_SDL_color(const Object_t obj, const SDL_Color* src) {
+    /* =========== VARIABLES ========== */
+
+    int result = EXIT_FAILURE;
+
+    /* ================================ */
+
+    if (obj != NULL) {
+
+        if (src != NULL) {
+            obj->color.r = src->r;
+            obj->color.g = src->g;
+            obj->color.b = src->b;
+
+            obj->color.a = src->a;
+
+            /* ================================ */
+
+            result = EXIT_SUCCESS;
+        }
+        else {
+            warn_with_user_msg(__func__, "source color is NULL");
+        }
+    }
+    else {
+        warn_with_user_msg(__func__, "provided object is NULL");
+    }
+
+    /* ================================ */
+
+    return result;
 }

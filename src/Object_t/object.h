@@ -48,4 +48,14 @@ extern int Object_is_inside_Area(const Object_t obj, const Area_t area);
 
 /* ================================================================ */
 
+extern int Object_set_color(const Object_t obj, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+
+/* ================================================================ */
+
+extern int Object_get_color(const Object_t obj, SDL_Color* dst);
+
+/* ================================================================ */
+
+extern int Object_set_SDL_color(const Object_t obj, const SDL_Color* src);
+
 #endif /* OBJECT_H */
