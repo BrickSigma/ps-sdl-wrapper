@@ -50,6 +50,8 @@ extern Area_t __current_area;
 
 extern int Rect_is_full_inside(const SDL_Rect* src, const SDL_Rect* dst);
 
+extern int Rect_is_collide(const SDL_Rect* rect_1, const SDL_Rect* rect_2);
+
 /* ================================================================ */
 
 #ifdef __cplusplus
