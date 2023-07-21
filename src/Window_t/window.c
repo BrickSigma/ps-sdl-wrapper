@@ -552,7 +552,8 @@ void Window_display_BG(const Window_t window, const Image_t image) {
 
             /* Get the size of a window's client area */
             SDL_GetWindowSize(window->window, &BG_dimension.w, &BG_dimension.h);
-
+            
+            /* ===================== CPU accelerated one  ===================== */
             if (window->context->type == SURFACE) {
 
                 SDL_BlitScaled((SDL_Surface*) image, NULL, (SDL_Surface*) window->context->context, &BG_dimension);
